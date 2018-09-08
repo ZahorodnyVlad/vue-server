@@ -44,7 +44,8 @@
         return {
           carName: '',
           carYear: 2018,
-          cars: []
+          cars: [],
+          resource: null
         }
       },
       methods: {
@@ -54,24 +55,32 @@
             year: this.carYear
           }
 
-          this.$http.post('http://localhost:3000/cars', car)
-              .then(responce => {
-            return responce.json()
-          })
-          .then(newCar => {
-            console.log(newCar)
-          })
+//          this.$http.post('http://localhost:3000/cars', car)
+//              .then(responce => {
+//            return responce.json()
+//          })
+//          .then(newCar => {
+//            console.log(newCar)
+//          })
+
+          this.resource.save({}, car)
         },
 
         loadCars () {
           this.$http.get('http://localhost:3000/cars')
-              .then(responce => {
-            return responce.json()
-          })
-        .then(cars => {
-            this.cars = cars
-        })
+
+//              .then(responce => {
+//            return responce.json()
+//          })
+//        .then(cars => {
+//            this.cars = cars
+//        })
+          this.resource.get().then(response => response.json())
+            .then(cars => this.cars =cars)
         }
+      },
+      created (){
+        this.resource = this.$resource('http://localhost:3000/cars')
       }
     }
 
