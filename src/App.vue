@@ -67,7 +67,7 @@
         },
 
         loadCars () {
-          this.$http.get('http://localhost:3000/cars')
+          this.$http.get('cars')
 
 //              .then(responce => {
 //            return responce.json()
@@ -80,7 +80,7 @@
         }
       },
       created (){
-        this.resource = this.$resource('http://localhost:3000/cars')
+        this.resource = this.$resource('cars')
       }
     }
 
